@@ -123,6 +123,22 @@ public static class Extension
     {
         behaviour.StartCoroutine(WaitBeforeAction(action, waitTime));
     }
+    
+    /// <summary>
+    /// Shuffle the List.
+    /// </summary>
+    public static void Shuffle<T>(this List<T> list)
+    {
+        System.Random rnd = new System.Random();
+        int n = list.Count;
+        while (n > 1)
+        {
+            int k = rnd.Next(n--);
+            T temp = list[n];
+            list[n] = list[k];
+            list[k] = temp;
+        }
+    }
     #endregion
 
     static System.Collections.IEnumerator WaitBeforeAction(Action action, float waitTime)
