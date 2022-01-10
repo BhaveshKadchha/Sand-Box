@@ -57,6 +57,24 @@ public class Helper
         return ULerp(target1, target2, UInverseLerp(current1, current2, val));
     }
     #endregion
+        
+    public static string JwtSecurityTokenHandler(string token)
+    {
+        var parts = token.Split('.');
+        if (parts.Length > 2)
+        {
+            var decode = parts[1];
+            var padLength = 4 - decode.Length % 4;
+            if (padLength < 4)
+            {
+                decode += new string('=', padLength);
+            }
+            var bytes = Convert.FromBase64String(decode);
+            return Encoding.ASCII.GetString(bytes);
+        }
+        else
+            return null;
+    }
 }
 
 
